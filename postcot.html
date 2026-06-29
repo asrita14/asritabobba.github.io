@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>When does Chain-of-Thought actually fail? — Asrita Bobba</title>
+  <meta name="description" content="My experiments on FLAN-T5 revealed something counterintuitive: more structured prompting can make things worse.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f0f; --surface: #161616; --border: #2a2a2a;
+      --text: #e8e6e0; --text-soft: #9a9890; --text-muted: #5a5855;
+      --accent: #c9a96e; --accent-soft: rgba(201,169,110,0.12); --link: #b8c9e8;
+      --serif: 'EB Garamond', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+      --nav-h: 56px; --max-w: 820px; --prose-w: 660px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: rgba(15,15,15,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
+    .nav-inner { max-width: var(--max-w); margin: 0 auto; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; }
+    .nav-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-soft); text-decoration: none; font-size: 0.875rem; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--text-soft); }
+    .mobile-menu { display: none; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); z-index: 99; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--text-soft); text-decoration: none; font-size: 1rem; padding: 0.85rem 2rem; border-bottom: 1px solid var(--border); }
+
+    /* POST LAYOUT */
+    .post-wrap { max-width: var(--prose-w); margin: 0 auto; padding: calc(var(--nav-h) + 4.5rem) 2rem 6rem; }
+
+    /* BACK LINK */
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text-muted); text-decoration: none; font-size: 0.8rem; margin-bottom: 3rem; transition: color 0.15s; letter-spacing: 0.02em; }
+    .back-link:hover { color: var(--text-soft); }
+    .back-link::before { content: '←'; }
+
+    /* POST HEADER */
+    .post-header { margin-bottom: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+    .post-meta-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .post-date { font-size: 0.78rem; color: var(--text-muted); }
+    .post-tag { font-size: 0.68rem; color: var(--accent); background: var(--accent-soft); border-radius: 2px; padding: 0.15rem 0.5rem; }
+    .post-tag-plain { font-size: 0.68rem; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); border-radius: 2px; padding: 0.15rem 0.5rem; }
+    .read-time { font-size: 0.78rem; color: var(--text-muted); }
+    .post-header h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 400; color: var(--text); line-height: 1.25; margin-bottom: 1rem; }
+    .post-lede { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--text-soft); line-height: 1.7; }
+
+    /* PROSE */
+    .prose { font-size: 1rem; color: var(--text-soft); line-height: 1.9; }
+    .prose p { margin-bottom: 1.5rem; }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose h2 { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; color: var(--text); margin: 2.5rem 0 1rem; }
+    .prose h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--text); margin: 2rem 0 0.75rem; font-style: italic; }
+    .prose strong { color: var(--text); font-weight: 500; }
+    .prose em { font-style: italic; }
+    .prose a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+    .prose a:hover { border-bottom-color: var(--link); }
+    .prose ul, .prose ol { padding-left: 1.4rem; margin-bottom: 1.5rem; }
+    .prose li { margin-bottom: 0.4rem; }
+    .prose blockquote { border-left: 2px solid var(--accent); padding: 0.1rem 0 0.1rem 1.25rem; margin: 2rem 0; }
+    .prose blockquote p { color: var(--text-soft); font-family: var(--serif); font-size: 1.05rem; font-style: italic; margin-bottom: 0; }
+    .prose code { font-family: 'Courier New', monospace; font-size: 0.85rem; background: var(--surface); border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; color: var(--accent); }
+    .prose pre { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 1.25rem; overflow-x: auto; margin: 1.5rem 0; }
+    .prose pre code { background: none; border: none; padding: 0; font-size: 0.83rem; color: var(--text-soft); }
+
+    /* DRAFT CALLOUT */
+    .draft-notice { background: var(--surface); border: 1px solid var(--border); border-left: 2px solid var(--accent); border-radius: 2px; padding: 1rem 1.25rem; margin-bottom: 2.5rem; font-size: 0.83rem; color: var(--text-soft); }
+    .draft-notice strong { color: var(--accent); }
+
+    /* SECTION PLACEHOLDER — remove when you fill in real content */
+    .placeholder { background: var(--surface); border: 1px dashed var(--border); border-radius: 3px; padding: 1.5rem; margin: 1.5rem 0; font-size: 0.83rem; color: var(--text-muted); font-style: italic; }
+
+    /* POST FOOTER */
+    .post-footer { margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+    .post-footer-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.25rem; }
+    .related-posts { display: flex; flex-direction: column; gap: 0; }
+    .related-item { display: grid; grid-template-columns: 50px 1fr; gap: 1.25rem; padding: 0.85rem 0; border-top: 1px solid var(--border); text-decoration: none; transition: opacity 0.15s; }
+    .related-item:hover { opacity: 0.7; }
+    .related-year { font-size: 0.75rem; color: var(--text-muted); padding-top: 0.15rem; }
+    .related-title { font-family: var(--serif); font-size: 1rem; color: var(--text); }
+
+    /* SITE FOOTER */
+    .site-footer { border-top: 1px solid var(--border); padding: 2rem 0; margin-top: 0; }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.78rem; color: var(--text-muted); }
+
+    @media (max-width: 680px) { .nav-links { display: none; } .nav-toggle { display: flex; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav"><div class="nav-inner">
+    <a href="index.html" class="nav-logo">Asrita Bobba</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#research">Research</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="blog.html" style="color:var(--text)">Writing</a></li>
+      <li><a href="cv.html">CV</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div></nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about" onclick="toggleMenu()">About</a>
+    <a href="index.html#research" onclick="toggleMenu()">Research</a>
+    <a href="index.html#projects" onclick="toggleMenu()">Projects</a>
+    <a href="blog.html">Writing</a>
+    <a href="cv.html">CV</a>
+  </div>
+
+  <div class="post-wrap">
+
+    <a href="blog.html" class="back-link">All posts</a>
+
+    <!-- ===================== POST HEADER ===================== -->
+    <div class="post-header">
+      <div class="post-meta-row">
+        <span class="post-date">2026</span>
+        <span class="post-tag">NLP</span>
+        <span class="post-tag-plain">LLMs</span>
+        <span class="post-tag-plain">FLAN-T5</span>
+        <span class="read-time">· ~8 min read</span>
+      </div>
+      <h1>When does Chain-of-Thought actually fail?</h1>
+      <p class="post-lede">My experiments on FLAN-T5 revealed something counterintuitive: more structured prompting can make things worse. Here's what actually happened in the ablation studies — and what it tells us about the limits of inference-time reasoning.</p>
+    </div>
+
+    <div class="draft-notice">
+      <strong>Draft in progress.</strong> Sections marked with a dashed box are placeholders — the argument is here, the writing isn't yet.
+    </div>
+
+    <!-- ===================== PROSE ===================== -->
+    <div class="prose">
+
+      <h2>Background</h2>
+      <p>Chain-of-Thought (CoT) prompting — the idea of asking a model to reason step-by-step before answering — has become one of the most reliably cited improvements in LLM benchmarks. The original paper showed dramatic gains on arithmetic and commonsense reasoning tasks. Since then it's been treated almost as a free lunch: add "Let's think step by step" and things get better.</p>
+      <p>My project set out to test whether that held for <strong>instruction-tuned encoder-decoder models</strong>, specifically FLAN-T5, and across a broader set of strategies: Zero-Shot, Few-Shot, standard CoT, and Self-Generated Examples (SGE).</p>
+      <p>The short answer: it doesn't always hold. And understanding <em>why</em> turns out to be more interesting than the benchmark numbers.</p>
+
+      <h2>The experimental setup</h2>
+      <div class="placeholder">[ Write up the framework here — model sizes tested (small/base/large/xl), benchmark tasks (GSM8K, CommonsenseQA, etc.), how prompts were constructed, evaluation metric. ~2 paragraphs. ]</div>
+
+      <h2>What we found</h2>
+      <h3>Zero-Shot CoT: gains on arithmetic, noise on commonsense</h3>
+      <div class="placeholder">[ Describe the arithmetic results — where CoT helped and by how much. Then pivot to commonsense tasks where CoT introduced hallucinated reasoning chains. Include a concrete example of a failure case if you have one. ]</div>
+
+      <h3>The SGE problem: garbage in, garbage out</h3>
+      <div class="placeholder">[ Self-Generated Examples were the most interesting failure mode. The model generates its own few-shot examples before answering — but if those examples are wrong, they compound the error. Describe what this looked like in practice. ]</div>
+
+      <h3>Scale doesn't fix it</h3>
+      <p>One assumption going in was that larger model variants would show stronger CoT gains — that the reasoning structure would be more reliably leveraged with more parameters. This largely didn't hold.</p>
+      <div class="placeholder">[ Show the scale comparison results. Which tasks scaled, which didn't. Hypothesis about why encoder-decoder architecture limits this compared to decoder-only models. ]</div>
+
+      <h2>Why encoder-decoder models are different</h2>
+      <p>Most CoT research is on decoder-only models — GPT-style architectures where the model generates a long completion token by token, naturally producing reasoning chains. FLAN-T5 is encoder-decoder: the input is encoded into a fixed representation, then decoded into an output.</p>
+      <p>This matters because CoT prompting assumes the model can "think in the output" — that generating reasoning tokens before the answer actually changes the internal computation. In encoder-decoder models, the heavy lifting happens in the encoder, and the decoder is relatively constrained in length and structure.</p>
+      <div class="placeholder">[ Add more technical depth here — attention mechanism differences, how FLAN's instruction tuning affects this, citations to relevant architecture papers. ]</div>
+
+      <h2>What this means for prompting practice</h2>
+      <p>The takeaway isn't that CoT is bad. It's that <strong>prompting strategies are architecture-dependent</strong>, and results from decoder-only benchmarks don't automatically transfer.</p>
+      <p>If you're working with FLAN-T5 or similar encoder-decoder models:</p>
+      <ul>
+        <li>CoT helps most on structured arithmetic tasks where the reasoning chain is short and verifiable</li>
+        <li>SGE is risky without a way to filter or validate the generated examples</li>
+        <li>For commonsense tasks, Few-Shot with carefully curated examples outperformed all inference-time reasoning strategies</li>
+      </ul>
+      <div class="placeholder">[ Any broader implications for the field? What would need to change architecturally or at training time to make CoT more reliable in encoder-decoder models? ]</div>
+
+      <h2>Open questions</h2>
+      <div class="placeholder">[ 3–4 questions this work raised that you didn't have time to answer — good fodder for future work or discussion. ]</div>
+
+      <blockquote>
+        <p>The best prompting strategy for a model depends on what the model actually does internally — not just what the output looks like.</p>
+      </blockquote>
+
+    </div>
+    <!-- END PROSE -->
+
+    <!-- ===================== POST FOOTER — RELATED POSTS ===================== -->
+    <div class="post-footer">
+      <div class="post-footer-label">More posts</div>
+      <div class="related-posts">
+        <a href="post-connectome.html" class="related-item">
+          <span class="related-year">2026</span>
+          <span class="related-title">What connectomes taught me about neural networks</span>
+        </a>
+        <a href="post-mlops.html" class="related-item">
+          <span class="related-year">2026</span>
+          <span class="related-title">The gap between research code and production pipelines</span>
+        </a>
+        <a href="post-fnirs.html" class="related-item">
+          <span class="related-year">2025</span>
+          <span class="related-title">fNIRS vs fMRI: working with two modalities in the same study</span>
+        </a>
+      </div>
+    </div>
+
+  </div><!-- end post-wrap -->
+
+  <footer class="site-footer"><div class="footer-inner">
+    <span>Asrita Bobba · asritabobba@gmail.com</span>
+    <span>Last updated June 2026</span>
+  </div></footer>
+
+  <script>function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }</script>
+</body>
+</html>
