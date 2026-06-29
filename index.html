@@ -3,54 +3,250 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name | Portfolio</title>
+  <title>Asrita Bobba — ML Researcher</title>
+  <meta name="description" content="Asrita Bobba — MS Computer Engineering at NYU. ML researcher working on NeuroAI, NLP, and ML Systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- NAVIGATION -->
-  <nav>
-    <span class="logo">Your Name</span>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">AB</a>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#research">research</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="blog.html">thoughts</a></li>
+      <li><a href="cv.html">cv</a></li>
     </ul>
+    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
   </nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <h1>Hi, I'm Asrita Bobba]</h1>
-    <p>Computer Engineering graduate at NYU · Interested in all things Science and Engineering</p>
-    <a href="#projects" class="btn">See My Work</a>
-  </section>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="toggleMenu()">about</a>
+    <a href="#research" onclick="toggleMenu()">research</a>
+    <a href="#projects" onclick="toggleMenu()">projects</a>
+    <a href="#skills" onclick="toggleMenu()">skills</a>
+    <a href="blog.html" onclick="toggleMenu()">thoughts</a>
+    <a href="cv.html" onclick="toggleMenu()">cv</a>
+  </div>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>2–3 sentences: who you are, what you're studying, what you're looking for.</p>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Project Name</h3>
-        <p>What it does, what tech you used, what you learned.</p>
-        <a href="https://github.com/asrita14">View on GitHub →</a>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">NeuroAI · NLP · ML Systems · NYU Tandon</div>
+      <h1 class="hero-name">Asrita<br><em>Bobba</em></h1>
+      <p class="hero-sub">MS Computer Engineering at NYU.<br>I study how intelligent systems — biological and artificial — reason, learn, and break.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">See my work</a>
+        <a href="cv.html" class="btn-ghost">View full CV →</a>
       </div>
-      <!-- Repeat for each project -->
+    </div>
+    <div class="hero-decoration">
+      <div class="deco-ring ring-1"></div>
+      <div class="deco-ring ring-2"></div>
+      <div class="deco-ring ring-3"></div>
+      <div class="deco-text">NeuroAI ✦ NLP ✦ Reinforcement Learning ✦ ML Systems ✦ NeuroAI ✦ NLP ✦ Reinforcement Learning ✦ ML Systems ✦</div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <h2>Get In Touch</h2>
-    <p>Email: <a href="mailto:you@email.com">you@email.com</a></p>
-    <p><a href="https://linkedin.com/in/yourprofile">LinkedIn</a> · 
-       <a href="https://github.com/yourusername">GitHub</a></p>
+  <section class="section" id="about">
+    <div class="section-inner two-col">
+      <div class="about-left">
+        <span class="eyebrow">about me</span>
+        <h2>I study how models — and brains — <em>think.</em></h2>
+      </div>
+      <div class="about-right">
+        <p>I'm a Master's student in Computer Engineering at NYU Tandon, with research interests spanning Machine Learning, NeuroAI, Natural Language Processing, and Reinforcement Learning. Before NYU, I completed my B.Tech in AI & Data Science at KL University, studying across 12 schools in 4 countries.</p>
+        <p>Currently, I work as a Research Assistant at NYU's <strong>SAVVY Lab</strong>, where I apply statistical and computational modeling to multimodal neural and behavioral data — investigating the anticipatory and social-cognitive mechanisms behind stuttering variability using fNIRS and fMRI signals.</p>
+        <p>I'm drawn to the hard questions at the intersection of AI and neuroscience: when does prompting fail? What can biological connectomes teach us about artificial architectures? How do we build ML systems that are actually reliable in production?</p>
+        <div class="about-links">
+          <a href="mailto:asritabobba@gmail.com" class="inline-link">asritabobba@gmail.com</a>
+          <a href="https://github.com/asrita14" class="inline-link" target="_blank">github</a>
+          <a href="https://linkedin.com/in/asritabobba" class="inline-link" target="_blank">linkedin</a>
+        </div>
+      </div>
+    </div>
   </section>
 
+  <section class="section section-alt" id="research">
+    <div class="section-inner">
+      <span class="eyebrow">research</span>
+      <h2>Current work</h2>
+      <div class="research-card">
+        <div class="research-label">Research Assistant · Aug 2025 – Present</div>
+        <h3>SAVVY Lab, New York University</h3>
+        <p>Investigating anticipatory and social-cognitive mechanisms underlying stuttering variability using multimodal neural and behavioral data (fNIRS, fMRI). I develop data processing pipelines for time-series neural signals, apply statistical modeling and feature extraction to high-dimensional multi-subject datasets, and collaborate with an interdisciplinary team of speech-language scientists and clinicians.</p>
+        <div class="research-tags">
+          <span>NeuroAI</span><span>fNIRS / fMRI</span><span>Time-Series Analysis</span><span>Statistical Modeling</span><span>Behavioral Data</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="section-inner">
+      <span class="eyebrow">projects</span>
+      <h2>Things I've built</h2>
+      <div class="project-grid">
+
+        <div class="project-card featured">
+          <div class="featured-left">
+            <div class="project-meta">
+              <span class="project-tag">NLP · LLMs · Reasoning</span>
+              <a href="https://github.com/asrita14/SGE-vs-ZeroShot-CoT" target="_blank" class="project-link">GitHub ↗</a>
+            </div>
+            <h3>Inference-Time Reasoning in Instruction-Tuned LLMs</h3>
+            <p>Investigated how inference-time prompting strategies — Zero-Shot, Few-Shot, Chain-of-Thought, and Self-Generated Examples — interact with model architecture and scale in instruction-tuned encoder-decoder models (FLAN-T5).</p>
+            <p>Built a modular experimental framework with prompt abstractions, ablation studies, and qualitative error analysis across arithmetic, QA, and commonsense reasoning benchmarks. Findings revealed structural limitations of inference-time reasoning, contributing to understanding of when prompting fails to compensate for underlying model weaknesses.</p>
+          </div>
+          <div class="featured-right">
+            <div class="tech-stack">
+              <span>Python</span><span>FLAN-T5</span><span>HuggingFace</span><span>Chain-of-Thought</span><span>HPC (NYU)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-meta">
+            <span class="project-tag">NeuroAI · PyTorch</span>
+          </div>
+          <h3>Connectome-Guided Reservoir Computing</h3>
+          <p>Designed biologically inspired MSS/SNN/ESN reservoir architectures using human and Drosophila connectomes as structural priors. Achieved perfect classification accuracy on structured spike-train manifolds. Collaborated with NeuroAI researchers to explore cross-species computational principles.</p>
+          <div class="tech-stack">
+            <span>Python</span><span>PyTorch</span><span>conn2res</span><span>SNN</span><span>HPC</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-meta">
+            <span class="project-tag">MLOps · Production</span>
+            <a href="https://github.com/asrita14/MLOPs-Project" target="_blank" class="project-link">GitHub ↗</a>
+          </div>
+          <h3>Taxi Demand Prediction — End-to-End MLOps Pipeline</h3>
+          <p>Production ML pipeline predicting high-demand NYC taxi pickup zones. Containerized model serving with FastAPI + Docker, automated batch inference via Airflow DAGs, ONNX-optimized models, and Prometheus/Grafana monitoring with retraining feedback loops.</p>
+          <div class="tech-stack">
+            <span>FastAPI</span><span>Docker</span><span>Airflow</span><span>ONNX</span><span>Prometheus</span><span>Grafana</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-meta">
+            <span class="project-tag">Computer Vision · GANs</span>
+          </div>
+          <h3>Cross-Domain Image Super-Resolution</h3>
+          <p>Benchmarked CNN-, GAN- (ESRGAN), and diffusion-based SR models on non-natural scientific imagery. Analyzed limitations of natural-image priors for structured domains using PSNR, SSIM, and perceptual metrics with custom degradation pipelines.</p>
+          <div class="tech-stack">
+            <span>PyTorch</span><span>ESRGAN</span><span>Diffusion Models</span><span>HPC</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-meta">
+            <span class="project-tag">Embedded ML · C</span>
+          </div>
+          <h3>Real-Time Embedded Sentry System</h3>
+          <p>Engineered an embedded security system using IMU-based gesture recognition for secure access control. Implemented adversarial robustness analysis (FGSM, PGD, Patch attacks) on ResNet-34 and VGG16, achieving >79% top-1 accuracy under robust training.</p>
+          <div class="tech-stack">
+            <span>C</span><span>PlatformIO</span><span>IMU</span><span>Embedded ML</span><span>PyTorch</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-meta">
+            <span class="project-tag">Computer Architecture</span>
+          </div>
+          <h3>RISC-V Cycle-Accurate Processor Simulator</h3>
+          <p>Implemented single-stage and 5-stage pipelined 32-bit RISC-V simulator in Python with RAW and control-flow hazard resolution. Quantitatively evaluated CPI and execution cycle performance metrics.</p>
+          <div class="tech-stack">
+            <span>Python</span><span>RISC-V</span><span>Computer Architecture</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="skills">
+    <div class="section-inner">
+      <span class="eyebrow">skills</span>
+      <h2>What I work with</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <ul>
+            <li>Python</li><li>C / C++</li><li>Java</li><li>SQL</li><li>MATLAB</li><li>JavaScript</li><li>R</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h4>ML & AI</h4>
+          <ul>
+            <li>PyTorch</li><li>Scikit-learn</li><li>HuggingFace Transformers</li><li>NumPy / Pandas</li><li>conn2res</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h4>MLOps & Infra</h4>
+          <ul>
+            <li>Docker</li><li>Apache Airflow</li><li>FastAPI</li><li>ONNX</li><li>Prometheus / Grafana</li><li>AWS / GCP</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h4>Web & Tools</h4>
+          <ul>
+            <li>React.js / Django / Flask</li><li>MySQL / Firebase</li><li>Git / GitHub</li><li>Linux / HPC</li><li>Power BI / Tableau</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="writing-preview">
+    <div class="section-inner">
+      <span class="eyebrow">thoughts</span>
+      <h2>Recent writing</h2>
+      <div class="posts-preview">
+        <a href="blog.html" class="post-card">
+          <span class="post-date">2026</span>
+          <h3>When does Chain-of-Thought actually fail?</h3>
+          <p>My experiments on FLAN-T5 revealed something counterintuitive: more structured prompting sometimes makes things worse. Here's why.</p>
+          <span class="read-more">Read →</span>
+        </a>
+        <a href="blog.html" class="post-card">
+          <span class="post-date">2026</span>
+          <h3>What connectomes taught me about neural networks</h3>
+          <p>Using biological connectomes as architectural priors for reservoir computing — and what happened when we achieved perfect accuracy on spike-train manifolds.</p>
+          <span class="read-more">Read →</span>
+        </a>
+      </div>
+      <a href="blog.html" class="btn-ghost" style="margin-top:2rem; display:inline-block;">All posts →</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="nav-logo">AB</span>
+      <p>MS Computer Engineering · NYU Tandon · New York</p>
+      <div class="footer-links">
+        <a href="https://github.com/asrita14" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/asritabobba" target="_blank">LinkedIn</a>
+        <a href="mailto:asritabobba@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.project-card, .skill-group, .post-card, .research-card').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
