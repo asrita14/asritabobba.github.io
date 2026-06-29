@@ -6,232 +6,281 @@
   <title>Asrita Bobba — ML Researcher</title>
   <meta name="description" content="Asrita Bobba — MS Computer Engineering at NYU. ML researcher working on NeuroAI, NLP, and ML Systems.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f0f; --surface: #161616; --border: #2a2a2a;
+      --text: #e8e6e0; --text-soft: #9a9890; --text-muted: #5a5855;
+      --accent: #c9a96e; --accent-soft: rgba(201,169,110,0.12);
+      --link: #b8c9e8;
+      --serif: 'EB Garamond', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --nav-h: 56px; --max-w: 820px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: rgba(15,15,15,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
+    .nav-inner { max-width: var(--max-w); margin: 0 auto; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; }
+    .nav-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-soft); text-decoration: none; font-size: 0.875rem; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--text-soft); }
+    .mobile-menu { display: none; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); z-index: 99; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--text-soft); text-decoration: none; font-size: 1rem; padding: 0.85rem 2rem; border-bottom: 1px solid var(--border); }
+    .mobile-menu a:hover { color: var(--text); }
+
+    /* LAYOUT */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+
+    /* HERO */
+    .hero { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: start; padding: calc(var(--nav-h) + 5rem) 0 4rem; border-bottom: 1px solid var(--border); }
+    .hero-location { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.9rem; }
+    .hero h1 { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.2rem); font-weight: 400; line-height: 1.15; color: var(--text); margin-bottom: 1.25rem; }
+    .hero-tagline { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--text-soft); line-height: 1.65; margin-bottom: 1.1rem; }
+    .hero-body { font-size: 0.92rem; color: var(--text-soft); line-height: 1.85; margin-bottom: 1.75rem; }
+    .highlight { color: var(--text); }
+    .hero-links { display: flex; flex-wrap: wrap; align-items: center; font-size: 0.875rem; gap: 0.2rem; }
+    .hero-links a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+    .hero-links a:hover { border-bottom-color: var(--link); }
+    .dot { color: var(--text-muted); margin: 0 0.55rem; }
+    .photo-circle { width: 110px; height: 110px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1.3rem; color: var(--text-muted); flex-shrink: 0; }
+
+    /* SECTIONS */
+    .section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section h2 { font-family: var(--serif); font-size: 1.45rem; font-weight: 400; color: var(--text); margin-bottom: 2rem; }
+    .section-note { font-size: 0.875rem; color: var(--text-soft); margin-top: -1.25rem; margin-bottom: 1.75rem; }
+    .section-note a { color: var(--link); text-decoration: none; }
+    .section-note a:hover { text-decoration: underline; }
+
+    /* ENTRIES */
+    .entry { display: grid; grid-template-columns: 115px 1fr; gap: 2rem; padding: 1.5rem 0; border-top: 1px solid var(--border); }
+    .entry:first-of-type { border-top: none; padding-top: 0; }
+    .entry-meta { font-size: 0.78rem; color: var(--text-muted); line-height: 1.85; padding-top: 0.1rem; }
+    .entry-meta a { color: var(--link); text-decoration: none; font-size: 0.75rem; display: block; margin-top: 0.3rem; }
+    .entry-title { font-family: var(--serif); font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; line-height: 1.4; }
+    .entry-title .ext { font-family: var(--sans); font-size: 0.78rem; color: var(--link); text-decoration: none; margin-left: 0.4rem; font-weight: 400; }
+    .entry-title .ext:hover { text-decoration: underline; }
+    .entry-body p { font-size: 0.875rem; color: var(--text-soft); line-height: 1.85; }
+    .entry-body .org { font-size: 0.85rem; color: var(--accent); margin-bottom: 0.55rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.85rem; }
+    .tag { font-size: 0.7rem; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); padding: 0.18rem 0.55rem; border-radius: 3px; }
+
+    /* WRITING LIST */
+    .writing-list { display: flex; flex-direction: column; }
+    .writing-row { display: grid; grid-template-columns: 50px 1fr; gap: 1.5rem; padding: 0.85rem 0; border-top: 1px solid var(--border); text-decoration: none; transition: opacity 0.15s; }
+    .writing-row:first-child { border-top: none; }
+    .writing-row:hover { opacity: 0.7; }
+    .writing-year { font-size: 0.78rem; color: var(--text-muted); padding-top: 0.15rem; }
+    .writing-title { font-family: var(--serif); font-size: 1.05rem; color: var(--text); line-height: 1.45; }
+
+    /* SKILLS */
+    .skills-list { display: flex; flex-direction: column; }
+    .skill-row { display: grid; grid-template-columns: 90px 1fr; gap: 1.5rem; padding: 0.6rem 0; border-top: 1px solid var(--border); font-size: 0.875rem; }
+    .skill-row:first-child { border-top: none; }
+    .skill-label { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.03em; padding-top: 0.1rem; }
+    .skill-val { color: var(--text-soft); line-height: 1.65; }
+
+    /* FOOTER */
+    .site-footer { border-top: 1px solid var(--border); padding: 2rem 0; margin-top: 0; }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.78rem; color: var(--text-muted); }
+
+    /* RESPONSIVE */
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .hero { grid-template-columns: 1fr; }
+      .photo-circle { display: none; }
+      .entry { grid-template-columns: 1fr; gap: 0.3rem; }
+      .entry-meta { padding-top: 0; }
+      .skill-row { grid-template-columns: 80px 1fr; }
+      .writing-row { grid-template-columns: 40px 1fr; }
+    }
+  </style>
 </head>
 <body>
 
   <nav class="nav">
-    <a href="index.html" class="nav-logo">AB</a>
-    <ul class="nav-links">
-      <li><a href="#about">about</a></li>
-      <li><a href="#research">research</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#skills">skills</a></li>
-      <li><a href="blog.html">thoughts</a></li>
-      <li><a href="cv.html">cv</a></li>
-    </ul>
-    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Asrita Bobba</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="blog.html">Writing</a></li>
+        <li><a href="cv.html">CV</a></li>
+      </ul>
+      <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#about" onclick="toggleMenu()">about</a>
-    <a href="#research" onclick="toggleMenu()">research</a>
-    <a href="#projects" onclick="toggleMenu()">projects</a>
-    <a href="#skills" onclick="toggleMenu()">skills</a>
-    <a href="blog.html" onclick="toggleMenu()">thoughts</a>
-    <a href="cv.html" onclick="toggleMenu()">cv</a>
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#research" onclick="toggleMenu()">Research</a>
+    <a href="#projects" onclick="toggleMenu()">Projects</a>
+    <a href="blog.html">Writing</a>
+    <a href="cv.html">CV</a>
   </div>
 
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-tag">NeuroAI · NLP · ML Systems · NYU Tandon</div>
-      <h1 class="hero-name">Asrita<br><em>Bobba</em></h1>
-      <p class="hero-sub">MS Computer Engineering at NYU.<br>I study how intelligent systems — biological and artificial — reason, learn, and break.</p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn-primary">See my work</a>
-        <a href="cv.html" class="btn-ghost">View full CV →</a>
-      </div>
-    </div>
-    <div class="hero-decoration">
-      <div class="deco-ring ring-1"></div>
-      <div class="deco-ring ring-2"></div>
-      <div class="deco-ring ring-3"></div>
-      <div class="deco-text">NeuroAI ✦ NLP ✦ Reinforcement Learning ✦ ML Systems ✦ NeuroAI ✦ NLP ✦ Reinforcement Learning ✦ ML Systems ✦</div>
-    </div>
-  </section>
+  <main>
 
-  <section class="section" id="about">
-    <div class="section-inner two-col">
-      <div class="about-left">
-        <span class="eyebrow">about me</span>
-        <h2>I study how models — and brains — <em>think.</em></h2>
-      </div>
-      <div class="about-right">
-        <p>I'm a Master's student in Computer Engineering at NYU Tandon, with research interests spanning Machine Learning, NeuroAI, Natural Language Processing, and Reinforcement Learning. Before NYU, I completed my B.Tech in AI & Data Science at KL University, studying across 12 schools in 4 countries.</p>
-        <p>Currently, I work as a Research Assistant at NYU's <strong>SAVVY Lab</strong>, where I apply statistical and computational modeling to multimodal neural and behavioral data — investigating the anticipatory and social-cognitive mechanisms behind stuttering variability using fNIRS and fMRI signals.</p>
-        <p>I'm drawn to the hard questions at the intersection of AI and neuroscience: when does prompting fail? What can biological connectomes teach us about artificial architectures? How do we build ML systems that are actually reliable in production?</p>
-        <div class="about-links">
-          <a href="mailto:asritabobba@gmail.com" class="inline-link">asritabobba@gmail.com</a>
-          <a href="https://github.com/asrita14" class="inline-link" target="_blank">github</a>
-          <a href="https://linkedin.com/in/asritabobba" class="inline-link" target="_blank">linkedin</a>
+    <section class="hero" id="about">
+      <div>
+        <p class="hero-location">New York, NY · NYU Tandon</p>
+        <h1>Asrita Bobba</h1>
+        <p class="hero-tagline">MS Computer Engineering. I study how intelligent systems — biological and artificial — reason, learn, and fail.</p>
+        <p class="hero-body">My research spans <span class="highlight">NeuroAI</span>, <span class="highlight">Natural Language Processing</span>, <span class="highlight">Reinforcement Learning</span>, and <span class="highlight">ML Systems</span>. I'm currently a Research Assistant at NYU's jackson lab, applying computational modeling to multimodal neural data to investigate mechanisms underlying speech-language disorders.</p>
+        <div class="hero-links">
+          <a href="mailto:asritabobba@gmail.com">asritabobba@gmail.com</a>
+          <span class="dot">·</span>
+          <a href="https://github.com/asrita14" target="_blank">GitHub</a>
+          <span class="dot">·</span>
+          <a href="https://www.linkedin.com/in/asritabobba/" target="_blank">LinkedIn</a>
+          <span class="dot">·</span>
+          <a href="cv.html">CV</a>
         </div>
       </div>
-    </div>
-  </section>
+      <div class="photo-circle">AB</div>
+    </section>
 
-  <section class="section section-alt" id="research">
-    <div class="section-inner">
-      <span class="eyebrow">research</span>
-      <h2>Current work</h2>
-      <div class="research-card">
-        <div class="research-label">Research Assistant · Aug 2025 – Present</div>
-        <h3>SAVVY Lab, New York University</h3>
-        <p>Investigating anticipatory and social-cognitive mechanisms underlying stuttering variability using multimodal neural and behavioral data (fNIRS, fMRI). I develop data processing pipelines for time-series neural signals, apply statistical modeling and feature extraction to high-dimensional multi-subject datasets, and collaborate with an interdisciplinary team of speech-language scientists and clinicians.</p>
-        <div class="research-tags">
-          <span>NeuroAI</span><span>fNIRS / fMRI</span><span>Time-Series Analysis</span><span>Statistical Modeling</span><span>Behavioral Data</span>
+    <section class="section" id="research">
+      <h2>Research</h2>
+      <div class="entry">
+        <div class="entry-meta">Aug 2025 –<br>Present</div>
+        <div class="entry-body">
+          <div class="entry-title">Research Assistant — <a href="https://www.scienceofstuttering.org/" target="_blank" style="color:inherit;border-bottom:1px solid var(--border);">jackson lab</a>, NYU</div>
+          <div class="org" style="font-size:0.85rem;color:var(--accent);margin-bottom:0.55rem;">New York University</div>
+          <p>Investigating anticipatory and social-cognitive mechanisms underlying stuttering variability using multimodal fNIRS and fMRI data. I develop time-series processing pipelines, apply statistical and computational modeling to high-dimensional multi-subject datasets, and collaborate with speech-language scientists and clinicians to design experiments and interpret findings.</p>
+          <div class="tags">
+            <span class="tag">NeuroAI</span><span class="tag">fNIRS / fMRI</span><span class="tag">Time-Series</span><span class="tag">Statistical Modeling</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="projects">
-    <div class="section-inner">
-      <span class="eyebrow">projects</span>
-      <h2>Things I've built</h2>
-      <div class="project-grid">
+    <section class="section" id="projects">
+      <h2>Projects</h2>
 
-        <div class="project-card featured">
-          <div class="featured-left">
-            <div class="project-meta">
-              <span class="project-tag">NLP · LLMs · Reasoning</span>
-              <a href="https://github.com/asrita14/SGE-vs-ZeroShot-CoT" target="_blank" class="project-link">GitHub ↗</a>
-            </div>
-            <h3>Inference-Time Reasoning in Instruction-Tuned LLMs</h3>
-            <p>Investigated how inference-time prompting strategies — Zero-Shot, Few-Shot, Chain-of-Thought, and Self-Generated Examples — interact with model architecture and scale in instruction-tuned encoder-decoder models (FLAN-T5).</p>
-            <p>Built a modular experimental framework with prompt abstractions, ablation studies, and qualitative error analysis across arithmetic, QA, and commonsense reasoning benchmarks. Findings revealed structural limitations of inference-time reasoning, contributing to understanding of when prompting fails to compensate for underlying model weaknesses.</p>
-          </div>
-          <div class="featured-right">
-            <div class="tech-stack">
-              <span>Python</span><span>FLAN-T5</span><span>HuggingFace</span><span>Chain-of-Thought</span><span>HPC (NYU)</span>
-            </div>
-          </div>
+      <div class="entry">
+        <div class="entry-meta">2025</div>
+        <div class="entry-body">
+          <div class="entry-title">Inference-Time Reasoning in Instruction-Tuned LLMs <a href="https://github.com/asrita14/SGE-vs-ZeroShot-CoT" target="_blank" class="ext">[GitHub]</a></div>
+          <p>Investigated Zero-Shot, Few-Shot, Chain-of-Thought, and Self-Generated Examples prompting strategies in FLAN-T5. Built a modular experimental framework with ablation studies and qualitative error analysis across arithmetic, QA, and commonsense reasoning benchmarks. Findings exposed structural limitations of inference-time reasoning in encoder-decoder architectures.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">FLAN-T5</span><span class="tag">HuggingFace</span><span class="tag">Chain-of-Thought</span><span class="tag">HPC</span></div>
         </div>
+      </div>
 
-        <div class="project-card">
-          <div class="project-meta">
-            <span class="project-tag">NeuroAI · PyTorch</span>
-          </div>
-          <h3>Connectome-Guided Reservoir Computing</h3>
-          <p>Designed biologically inspired MSS/SNN/ESN reservoir architectures using human and Drosophila connectomes as structural priors. Achieved perfect classification accuracy on structured spike-train manifolds. Collaborated with NeuroAI researchers to explore cross-species computational principles.</p>
-          <div class="tech-stack">
-            <span>Python</span><span>PyTorch</span><span>conn2res</span><span>SNN</span><span>HPC</span>
-          </div>
+      <div class="entry">
+        <div class="entry-meta">2025</div>
+        <div class="entry-body">
+          <div class="entry-title">Connectome-Guided Reservoir Computing</div>
+          <p>Designed biologically inspired MSS/SNN/ESN reservoir architectures using human and Drosophila connectomes as structural priors, achieving perfect classification accuracy on structured spike-train manifolds. Built full pipeline: input-node selection, criticality tuning, PCA/raster visualization, and functional-network ablation studies. Collaborative work with NeuroAI researchers.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">conn2res</span><span class="tag">SNN</span><span class="tag">HPC</span></div>
         </div>
+      </div>
 
-        <div class="project-card">
-          <div class="project-meta">
-            <span class="project-tag">MLOps · Production</span>
-            <a href="https://github.com/asrita14/MLOPs-Project" target="_blank" class="project-link">GitHub ↗</a>
-          </div>
-          <h3>Taxi Demand Prediction — End-to-End MLOps Pipeline</h3>
-          <p>Production ML pipeline predicting high-demand NYC taxi pickup zones. Containerized model serving with FastAPI + Docker, automated batch inference via Airflow DAGs, ONNX-optimized models, and Prometheus/Grafana monitoring with retraining feedback loops.</p>
-          <div class="tech-stack">
-            <span>FastAPI</span><span>Docker</span><span>Airflow</span><span>ONNX</span><span>Prometheus</span><span>Grafana</span>
-          </div>
+      <div class="entry">
+        <div class="entry-meta">2025</div>
+        <div class="entry-body">
+          <div class="entry-title">End-to-End MLOps Pipeline — NYC Taxi Demand Prediction <a href="https://github.com/asrita14/MLOPs-Project" target="_blank" class="ext">[GitHub]</a></div>
+          <p>Production ML pipeline predicting high-demand NYC taxi pickup zones. Containerized model serving with FastAPI + Docker, automated batch inference via Airflow DAGs, ONNX-optimized models for latency benchmarking, and Prometheus/Grafana monitoring with retraining feedback loops.</p>
+          <div class="tags"><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">Airflow</span><span class="tag">ONNX</span><span class="tag">Prometheus</span></div>
         </div>
+      </div>
 
-        <div class="project-card">
-          <div class="project-meta">
-            <span class="project-tag">Computer Vision · GANs</span>
-          </div>
-          <h3>Cross-Domain Image Super-Resolution</h3>
-          <p>Benchmarked CNN-, GAN- (ESRGAN), and diffusion-based SR models on non-natural scientific imagery. Analyzed limitations of natural-image priors for structured domains using PSNR, SSIM, and perceptual metrics with custom degradation pipelines.</p>
-          <div class="tech-stack">
-            <span>PyTorch</span><span>ESRGAN</span><span>Diffusion Models</span><span>HPC</span>
-          </div>
+      <div class="entry">
+        <div class="entry-meta">2025</div>
+        <div class="entry-body">
+          <div class="entry-title">Cross-Domain Image Super-Resolution</div>
+          <p>Analyzed limitations of natural-image priors for reconstructing scientific imagery. Benchmarked CNN-, GAN- (ESRGAN), and diffusion-based SR models using PSNR, SSIM, and perceptual metrics; custom degradation pipelines and ablation studies exposed generalization gaps across domains.</p>
+          <div class="tags"><span class="tag">PyTorch</span><span class="tag">ESRGAN</span><span class="tag">Diffusion Models</span><span class="tag">HPC</span></div>
         </div>
+      </div>
 
-        <div class="project-card">
-          <div class="project-meta">
-            <span class="project-tag">Embedded ML · C</span>
-          </div>
-          <h3>Real-Time Embedded Sentry System</h3>
-          <p>Engineered an embedded security system using IMU-based gesture recognition for secure access control. Implemented adversarial robustness analysis (FGSM, PGD, Patch attacks) on ResNet-34 and VGG16, achieving >79% top-1 accuracy under robust training.</p>
-          <div class="tech-stack">
-            <span>C</span><span>PlatformIO</span><span>IMU</span><span>Embedded ML</span><span>PyTorch</span>
-          </div>
+      <div class="entry">
+        <div class="entry-meta">2025</div>
+        <div class="entry-body">
+          <div class="entry-title">Real-Time Embedded Sentry System</div>
+          <p>Engineered an embedded security system using IMU-based gesture recognition for secure access control. Evaluated FGSM, PGD, and Patch adversarial attacks on ResNet-34 and VGG16, achieving >79% top-1 accuracy under robust training.</p>
+          <div class="tags"><span class="tag">C</span><span class="tag">PlatformIO</span><span class="tag">IMU</span><span class="tag">PyTorch</span></div>
         </div>
+      </div>
 
-        <div class="project-card">
-          <div class="project-meta">
-            <span class="project-tag">Computer Architecture</span>
-          </div>
-          <h3>RISC-V Cycle-Accurate Processor Simulator</h3>
+      <div class="entry">
+        <div class="entry-meta">2025</div>
+        <div class="entry-body">
+          <div class="entry-title">RISC-V Cycle-Accurate Processor Simulator</div>
           <p>Implemented single-stage and 5-stage pipelined 32-bit RISC-V simulator in Python with RAW and control-flow hazard resolution. Quantitatively evaluated CPI and execution cycle performance metrics.</p>
-          <div class="tech-stack">
-            <span>Python</span><span>RISC-V</span><span>Computer Architecture</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt" id="skills">
-    <div class="section-inner">
-      <span class="eyebrow">skills</span>
-      <h2>What I work with</h2>
-      <div class="skills-grid">
-        <div class="skill-group">
-          <h4>Languages</h4>
-          <ul>
-            <li>Python</li><li>C / C++</li><li>Java</li><li>SQL</li><li>MATLAB</li><li>JavaScript</li><li>R</li>
-          </ul>
-        </div>
-        <div class="skill-group">
-          <h4>ML & AI</h4>
-          <ul>
-            <li>PyTorch</li><li>Scikit-learn</li><li>HuggingFace Transformers</li><li>NumPy / Pandas</li><li>conn2res</li>
-          </ul>
-        </div>
-        <div class="skill-group">
-          <h4>MLOps & Infra</h4>
-          <ul>
-            <li>Docker</li><li>Apache Airflow</li><li>FastAPI</li><li>ONNX</li><li>Prometheus / Grafana</li><li>AWS / GCP</li>
-          </ul>
-        </div>
-        <div class="skill-group">
-          <h4>Web & Tools</h4>
-          <ul>
-            <li>React.js / Django / Flask</li><li>MySQL / Firebase</li><li>Git / GitHub</li><li>Linux / HPC</li><li>Power BI / Tableau</li>
-          </ul>
+          <div class="tags"><span class="tag">Python</span><span class="tag">RISC-V</span><span class="tag">Computer Architecture</span></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="writing-preview">
-    <div class="section-inner">
-      <span class="eyebrow">thoughts</span>
-      <h2>Recent writing</h2>
-      <div class="posts-preview">
-        <a href="blog.html" class="post-card">
-          <span class="post-date">2026</span>
-          <h3>When does Chain-of-Thought actually fail?</h3>
-          <p>My experiments on FLAN-T5 revealed something counterintuitive: more structured prompting sometimes makes things worse. Here's why.</p>
-          <span class="read-more">Read →</span>
+    <section class="section" id="experience">
+      <h2>Experience</h2>
+      <div class="entry">
+        <div class="entry-meta">Jul 2023 –<br>Jan 2024</div>
+        <div class="entry-body">
+          <div class="entry-title">Data Analyst Intern — Let's Transport</div>
+          <div class="org" style="font-size:0.85rem;color:var(--accent);margin-bottom:0.55rem;">Bengaluru, India</div>
+          <p>Built predictive models for route optimization using Python, reducing travel time variance and improving logistics efficiency. Designed Power BI / Tableau dashboards for operational KPIs. Processed large-scale trip datasets via SQL to inform quarterly planning.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-meta">Jun – Jul 2022</div>
+        <div class="entry-body">
+          <div class="entry-title">Web Development Intern — Swecha</div>
+          <div class="org" style="font-size:0.85rem;color:var(--accent);margin-bottom:0.55rem;">Vijayawada, India</div>
+          <p>Developed Django/JavaScript applications to expand digital learning access for underserved students; architected scalable backend services.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="writing">
+      <h2>Writing</h2>
+      <p class="section-note">Notes on ML research, NeuroAI, and things I'm figuring out. <a href="blog.html">See all posts →</a></p>
+      <div class="writing-list">
+        <a href="blog.html" class="writing-row">
+          <span class="writing-year">2026</span>
+          <span class="writing-title">When does Chain-of-Thought actually fail?</span>
         </a>
-        <a href="blog.html" class="post-card">
-          <span class="post-date">2026</span>
-          <h3>What connectomes taught me about neural networks</h3>
-          <p>Using biological connectomes as architectural priors for reservoir computing — and what happened when we achieved perfect accuracy on spike-train manifolds.</p>
-          <span class="read-more">Read →</span>
+        <a href="blog.html" class="writing-row">
+          <span class="writing-year">2026</span>
+          <span class="writing-title">What connectomes taught me about neural networks</span>
+        </a>
+        <a href="blog.html" class="writing-row">
+          <span class="writing-year">2026</span>
+          <span class="writing-title">The gap between research code and production pipelines</span>
         </a>
       </div>
-      <a href="blog.html" class="btn-ghost" style="margin-top:2rem; display:inline-block;">All posts →</a>
-    </div>
-  </section>
+    </section>
 
-  <footer class="footer">
+    <section class="section" id="skills">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <div class="skill-row"><span class="skill-label">Languages</span><span class="skill-val">Python, C/C++, Java, SQL, MATLAB, JavaScript, R</span></div>
+        <div class="skill-row"><span class="skill-label">ML / AI</span><span class="skill-val">PyTorch, Scikit-learn, HuggingFace Transformers, NumPy, Pandas, conn2res</span></div>
+        <div class="skill-row"><span class="skill-label">MLOps</span><span class="skill-val">Docker, Apache Airflow, FastAPI, ONNX, Prometheus, Grafana, AWS/GCP</span></div>
+        <div class="skill-row"><span class="skill-label">Web</span><span class="skill-val">React.js, Django, Flask, Vue.js, Node.js, MySQL, Firebase</span></div>
+        <div class="skill-row"><span class="skill-label">Tools</span><span class="skill-val">Git, Linux, HPC clusters, PlatformIO, Power BI, Tableau</span></div>
+        <div class="skill-row"><span class="skill-label">Languages</span><span class="skill-val">English, Hindi, Telugu (all native)</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
     <div class="footer-inner">
-      <span class="nav-logo">AB</span>
-      <p>MS Computer Engineering · NYU Tandon · New York</p>
-      <div class="footer-links">
-        <a href="https://github.com/asrita14" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/asritabobba" target="_blank">LinkedIn</a>
-        <a href="mailto:asritabobba@gmail.com">Email</a>
-      </div>
+      <span>Asrita Bobba · asritabobba@gmail.com</span>
+      <span>Last updated June 2026</span>
     </div>
   </footer>
 
@@ -239,14 +288,10 @@
     function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
       });
     });
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.project-card, .skill-group, .post-card, .research-card').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
