@@ -1,120 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Thoughts — Asrita Bobba</title>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Writing — Asrita Bobba</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f0f; --surface: #161616; --border: #2a2a2a;
+      --text: #e8e6e0; --text-soft: #9a9890; --text-muted: #5a5855;
+      --accent: #c9a96e; --accent-soft: rgba(201,169,110,0.12); --link: #b8c9e8;
+      --serif: 'EB Garamond', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+      --nav-h: 56px; --max-w: 820px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; -webkit-font-smoothing: antialiased; }
+    .nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: rgba(15,15,15,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
+    .nav-inner { max-width: var(--max-w); margin: 0 auto; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; }
+    .nav-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-soft); text-decoration: none; font-size: 0.875rem; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--text-soft); }
+    .mobile-menu { display: none; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); z-index: 99; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--text-soft); text-decoration: none; font-size: 1rem; padding: 0.85rem 2rem; border-bottom: 1px solid var(--border); }
+    .site-footer { border-top: 1px solid var(--border); padding: 2rem 0; }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.78rem; color: var(--text-muted); }
+
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding: calc(var(--nav-h) + 5rem) 2rem 5rem; }
+    .page-header { margin-bottom: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+    .page-header h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: var(--text); margin-bottom: 0.75rem; }
+    .page-header p { font-size: 0.9rem; color: var(--text-soft); max-width: 500px; }
+    .notice { background: var(--surface); border: 1px solid var(--border); border-left: 2px solid var(--accent); padding: 0.9rem 1.2rem; margin-bottom: 2.5rem; font-size: 0.83rem; color: var(--text-soft); border-radius: 2px; }
+    .notice strong { color: var(--accent); }
+    .post-list { display: flex; flex-direction: column; }
+    .post-item { display: grid; grid-template-columns: 140px 1fr; gap: 2rem; padding: 2rem 0; border-top: 1px solid var(--border); text-decoration: none; transition: opacity 0.15s; }
+    .post-item:hover { opacity: 0.72; }
+    .post-meta { font-size: 0.78rem; color: var(--text-muted); line-height: 1.9; }
+    .post-tag { display: inline-block; margin-top: 0.35rem; font-size: 0.67rem; color: var(--accent); background: var(--accent-soft); border-radius: 2px; padding: 0.12rem 0.45rem; }
+    .post-title { font-family: var(--serif); font-size: 1.15rem; color: var(--text); margin-bottom: 0.45rem; line-height: 1.4; }
+    .post-excerpt { font-size: 0.875rem; color: var(--text-soft); line-height: 1.78; }
+    @media (max-width: 680px) { .nav-links { display: none; } .nav-toggle { display: flex; } .post-item { grid-template-columns: 1fr; gap: 0.35rem; } }
+  </style>
 </head>
 <body>
-  <nav class="nav">
-    <a href="index.html" class="nav-logo">AB</a>
+  <nav class="nav"><div class="nav-inner">
+    <a href="index.html" class="nav-logo">Asrita Bobba</a>
     <ul class="nav-links">
-      <li><a href="index.html#about">about</a></li>
-      <li><a href="index.html#research">research</a></li>
-      <li><a href="index.html#projects">projects</a></li>
-      <li><a href="index.html#skills">skills</a></li>
-      <li><a href="blog.html" style="color:var(--accent)">thoughts</a></li>
-      <li><a href="cv.html">cv</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#research">Research</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="blog.html" style="color:var(--text)">Writing</a></li>
+      <li><a href="cv.html">CV</a></li>
     </ul>
-    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
-  </nav>
+    <button class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div></nav>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html#about" onclick="toggleMenu()">about</a>
-    <a href="index.html#research" onclick="toggleMenu()">research</a>
-    <a href="index.html#projects" onclick="toggleMenu()">projects</a>
-    <a href="index.html#skills" onclick="toggleMenu()">skills</a>
-    <a href="blog.html" onclick="toggleMenu()">thoughts</a>
-    <a href="cv.html" onclick="toggleMenu()">cv</a>
+    <a href="index.html#about" onclick="toggleMenu()">About</a>
+    <a href="index.html#research" onclick="toggleMenu()">Research</a>
+    <a href="index.html#projects" onclick="toggleMenu()">Projects</a>
+    <a href="blog.html">Writing</a>
+    <a href="cv.html">CV</a>
   </div>
 
-  <div class="blog-hero">
-    <span class="eyebrow">thoughts & writing</span>
-    <h1>Things I'm <em>thinking about</em></h1>
-    <p>Notes on ML research, NeuroAI, reasoning, and whatever I'm learning right now. Writing is how I understand things.</p>
-  </div>
-
-  <div class="blog-list">
-
-    <div class="write-note">
-      <strong>To add:</strong> Replace these placeholder posts with your own writing. Even rough lab notes, paper summaries, or project reflections make strong posts. Each one signals research thinking to recruiters and collaborators.
+  <div class="wrap">
+    <div class="page-header">
+      <h1>Writing</h1>
+      <p>Notes on ML research, NeuroAI, and things I'm figuring out. Writing is how I understand things.</p>
     </div>
-
-    <a href="#" class="blog-item">
-      <div class="blog-date-col">
-        2026
-        <div class="blog-tag-pill">NLP</div>
-      </div>
-      <div class="blog-content">
-        <h2>When does Chain-of-Thought actually fail?</h2>
-        <p>My experiments on FLAN-T5 revealed something counterintuitive: more structured prompting can make things worse. I trace through what happened in my ablation studies and what it tells us about the structural limits of encoder-decoder architectures at inference time.</p>
-        <span class="blog-read">Read →</span>
-      </div>
-    </a>
-
-    <a href="#" class="blog-item">
-      <div class="blog-date-col">
-        2026
-        <div class="blog-tag-pill">NeuroAI</div>
-      </div>
-      <div class="blog-content">
-        <h2>What connectomes taught me about neural networks</h2>
-        <p>Using human and Drosophila connectomes as architectural priors for reservoir computing produced some surprising results — including perfect classification accuracy. But the more interesting finding was about criticality. Here's what biological structure actually buys you in an artificial system.</p>
-        <span class="blog-read">Read →</span>
-      </div>
-    </a>
-
-    <a href="#" class="blog-item">
-      <div class="blog-date-col">
-        2026
-        <div class="blog-tag-pill">MLOps</div>
-      </div>
-      <div class="blog-content">
-        <h2>The gap between research code and production pipelines</h2>
-        <p>Building an end-to-end MLOps pipeline for NYC taxi demand prediction surfaced something I hadn't fully appreciated before: research and production operate on completely different assumptions about failure modes. Some concrete lessons from containerizing a model with FastAPI, Airflow, and ONNX.</p>
-        <span class="blog-read">Read →</span>
-      </div>
-    </a>
-
-    <a href="#" class="blog-item">
-      <div class="blog-date-col">
-        2025
-        <div class="blog-tag-pill">Research</div>
-      </div>
-      <div class="blog-content">
-        <h2>fNIRS vs fMRI: working with two modalities in the same study</h2>
-        <p>At the SAVVY Lab I work with both fNIRS and fMRI signals for the same subjects. Aligning time-series from two instruments with different temporal and spatial resolutions requires more pipeline work than most papers let on. Notes on what actually works.</p>
-        <span class="blog-read">Read →</span>
-      </div>
-    </a>
-
-    <a href="#" class="blog-item">
-      <div class="blog-date-col">
-        2025
-        <div class="blog-tag-pill">Reflection</div>
-      </div>
-      <div class="blog-content">
-        <h2>Studying at 12 schools across 4 countries: what I actually learned</h2>
-        <p>Cross-cultural academic experience isn't just a resume line. Moving between research environments in India, Thailand, and the US shaped how I approach collaboration, ambiguity, and writing for different audiences. A reflection on what travels and what doesn't.</p>
-        <span class="blog-read">Read →</span>
-      </div>
-    </a>
-
+    <div class="notice"><strong>Note:</strong> Replace these with your actual posts — paper summaries, project reflections, and lab notes all work well.</div>
+    <div class="post-list">
+      <a href="post-cot.html" class="post-item">
+        <div class="post-meta">2026<div class="post-tag">NLP</div></div>
+        <div><div class="post-title">When does Chain-of-Thought actually fail?</div><div class="post-excerpt">My experiments on FLAN-T5 revealed something counterintuitive: more structured prompting can make things worse. I trace through what happened in my ablation studies and what it tells us about the structural limits of encoder-decoder architectures at inference time.</div></div>
+      </a>
+      <a href="post-cot.html" class="post-item">
+        <div class="post-meta">2026<div class="post-tag">NeuroAI</div></div>
+        <div><div class="post-title">What connectomes taught me about neural networks</div><div class="post-excerpt">Using human and Drosophila connectomes as architectural priors for reservoir computing produced surprising results — including perfect classification accuracy on spike-train manifolds. The more interesting finding was about criticality tuning.</div></div>
+      </a>
+      <a href="post-cot.html" class="post-item">
+        <div class="post-meta">2026<div class="post-tag">MLOps</div></div>
+        <div><div class="post-title">The gap between research code and production pipelines</div><div class="post-excerpt">Building an end-to-end MLOps pipeline for NYC taxi demand prediction surfaced something I hadn't fully appreciated: research and production operate on completely different assumptions about failure modes.</div></div>
+      </a>
+      <a href="post-cot.html" class="post-item">
+        <div class="post-meta">2025<div class="post-tag">Research</div></div>
+        <div><div class="post-title">fNIRS vs fMRI: working with two modalities in the same study</div><div class="post-excerpt">At the jackson lab I work with both fNIRS and fMRI signals for the same subjects. Aligning time-series from two instruments with different temporal and spatial resolutions requires more pipeline work than most papers describe.</div></div>
+      </a>
+      <a href="post-cot.html" class="post-item">
+        <div class="post-meta">2025<div class="post-tag">Reflection</div></div>
+        <div><div class="post-title">Studying at 12 schools across 4 countries</div><div class="post-excerpt">Cross-cultural academic experience isn't just a resume line. Moving between research environments in India, Thailand, and the US shaped how I approach collaboration, ambiguity, and writing for different audiences.</div></div>
+      </a>
+    </div>
   </div>
 
-  <footer class="footer">
-    <div class="footer-inner">
-      <span class="nav-logo">AB</span>
-      <p>MS Computer Engineering · NYU Tandon · New York</p>
-      <div class="footer-links">
-        <a href="https://github.com/asrita14" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/asritabobba" target="_blank">LinkedIn</a>
-        <a href="mailto:asritabobba@gmail.com">Email</a>
-      </div>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="footer-inner"><span>Asrita Bobba · asritabobba@gmail.com</span><span>Last updated June 2026</span></div></footer>
   <script>function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }</script>
 </body>
 </html>
