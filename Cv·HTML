@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV — Asrita Bobba</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">AB</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">about</a></li>
+      <li><a href="index.html#research">research</a></li>
+      <li><a href="index.html#projects">projects</a></li>
+      <li><a href="index.html#skills">skills</a></li>
+      <li><a href="blog.html">thoughts</a></li>
+      <li><a href="cv.html" style="color:var(--accent)">cv</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about" onclick="toggleMenu()">about</a>
+    <a href="index.html#research" onclick="toggleMenu()">research</a>
+    <a href="index.html#projects" onclick="toggleMenu()">projects</a>
+    <a href="index.html#skills" onclick="toggleMenu()">skills</a>
+    <a href="blog.html" onclick="toggleMenu()">thoughts</a>
+    <a href="cv.html" onclick="toggleMenu()">cv</a>
+  </div>
+
+  <div class="cv-wrap">
+    <div class="cv-header">
+      <div>
+        <span class="eyebrow">curriculum vitae</span>
+        <h1>Asrita <em>Bobba</em></h1>
+        <p>MS Computer Engineering · NYU Tandon School of Engineering</p>
+        <p style="color:var(--ink-muted); font-size:0.88rem;">New York, NY · +1 (718) 552-7090</p>
+        <div class="cv-contact">
+          <a href="mailto:asritabobba@gmail.com">asritabobba@gmail.com</a>
+          <a href="https://github.com/asrita14" target="_blank">github.com/asrita14</a>
+          <a href="https://asritabobba.github.io" target="_blank">asritabobba.github.io</a>
+        </div>
+      </div>
+      <a href="Asrita_Bobba_Resume.pdf" class="cv-download" download>↓ Download Resume</a>
+    </div>
+
+    <div class="cv-section">
+      <div class="cv-section-title">Research Interests</div>
+      <p style="color:var(--ink-soft); font-size:0.95rem; line-height:1.8;">Machine Learning · NeuroAI · Natural Language Processing · Reinforcement Learning · ML Systems</p>
+    </div>
+
+    <div class="cv-section">
+      <div class="cv-section-title">Education</div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">2024 — Present<br>New York, NY</div>
+        <div class="cv-entry-body">
+          <h3>Master of Science, Computer Engineering</h3>
+          <div class="org">New York University, Tandon School of Engineering</div>
+          <p>Coursework: Machine Learning, Deep Learning, NLP, Advanced Computer Vision, Reinforcement Learning & Optimal Control I & II, Neuroinformatics, MLOps & Systems Engineering, Real-Time Embedded Systems, Computing Systems Architecture</p>
+        </div>
+      </div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">2020 — 2024<br>India</div>
+        <div class="cv-entry-body">
+          <h3>Bachelor of Technology, Artificial Intelligence & Data Science</h3>
+          <div class="org">KL University</div>
+          <p>Coursework: Machine Learning, Deep Learning, NLP, Computer Vision, Speech Processing, Big Data Analytics, Cloud Computing, Signal Processing, Data Structures & Algorithms, Probability & Statistics, Computer Networks & Security, Operating Systems</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <div class="cv-section-title">Research Experience</div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">Aug 2025 –<br>Present<br>New York, NY</div>
+        <div class="cv-entry-body">
+          <h3>Research Assistant</h3>
+          <div class="org">SAVVY Lab, New York University</div>
+          <ul>
+            <li>Conduct quantitative analysis of multimodal neural and behavioral data — including fNIRS and fMRI signals — to investigate anticipatory and social-cognitive mechanisms underlying stuttering variability.</li>
+            <li>Develop and maintain data processing pipelines for time-series neural signals; apply statistical modeling and feature extraction to high-dimensional, multi-subject datasets.</li>
+            <li>Collaborate across an interdisciplinary team of speech-language scientists and clinicians to design experiments and interpret findings.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <div class="cv-section-title">Industry Experience</div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">Jul 2023 –<br>Jan 2024<br>Bengaluru, India</div>
+        <div class="cv-entry-body">
+          <h3>Data Analyst Intern</h3>
+          <div class="org">Let's Transport</div>
+          <ul>
+            <li>Built and fine-tuned predictive models for route optimization using Python (Pandas, NumPy, Scikit-learn), reducing travel time variance and improving logistics efficiency across the fleet.</li>
+            <li>Designed interactive dashboards in Power BI and Tableau to surface operational KPIs, enabling data-driven decision-making for the strategy team.</li>
+            <li>Processed and analyzed large-scale trip and vehicle datasets via SQL and Python, identifying performance trends that directly informed quarterly business planning.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">Jun 2022 –<br>Jul 2022<br>Vijayawada, India</div>
+        <div class="cv-entry-body">
+          <h3>Web Development Intern</h3>
+          <div class="org">Swecha</div>
+          <ul>
+            <li>Developed web applications with Django, HTML, CSS, and JavaScript to expand digital learning access for underserved students across multiple institutions.</li>
+            <li>Architected scalable backend services, optimized web performance, and contributed to code reviews in a cross-functional team environment.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">Dec 2022<br>Thailand</div>
+        <div class="cv-entry-body">
+          <h3>Environmental Data Intern</h3>
+          <div class="org">Asian Institute of Technology</div>
+          <ul>
+            <li>Conducted structured field surveys and environmental data collection to analyze plant density and biodiversity across campus ecosystems.</li>
+            <li>Applied statistical modeling in R and Excel to evaluate population dynamics; synthesized findings into a written report for mixed technical and non-technical audiences.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <div class="cv-section-title">Research Projects</div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">2025<br><a href="https://github.com/asrita14/SGE-vs-ZeroShot-CoT" target="_blank">GitHub ↗</a></div>
+        <div class="cv-entry-body">
+          <h3>Inference-Time Reasoning in Instruction-Tuned LLMs</h3>
+          <div class="org">NLP · FLAN-T5 · HuggingFace · HPC</div>
+          <ul>
+            <li>Investigated how inference-time prompting strategies (Zero-Shot, Few-Shot, CoT, SGE) interact with model architecture and scale in instruction-tuned encoder-decoder models.</li>
+            <li>Built modular experimental framework with prompt abstractions, ablation studies, and qualitative error analysis across arithmetic, QA, and commonsense reasoning benchmarks.</li>
+            <li>Findings revealed structural limitations of inference-time reasoning in FLAN-T5, contributing to understanding of when prompting fails to compensate for underlying model weaknesses.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">2025</div>
+        <div class="cv-entry-body">
+          <h3>Connectome-Guided Reservoir Computing</h3>
+          <div class="org">Python · PyTorch · conn2res · SNN · HPC</div>
+          <ul>
+            <li>Led design and evaluation of biologically inspired MSS/SNN/ESN reservoir architectures using human and Drosophila connectomes as structural priors, achieving perfect classification accuracy on structured spike-train manifolds.</li>
+            <li>Collaborated with NeuroAI researchers to explore cross-species computational principles; built full pipeline including criticality tuning, PCA/raster visualization, and functional-network ablation studies.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">2025<br><a href="https://github.com/asrita14/MLOPs-Project" target="_blank">GitHub ↗</a></div>
+        <div class="cv-entry-body">
+          <h3>Taxi Demand Prediction — End-to-End MLOps Pipeline</h3>
+          <div class="org">FastAPI · Docker · Airflow · ONNX · Prometheus</div>
+          <ul>
+            <li>Developed production ML pipeline predicting high-demand NYC taxi pickup zones; containerized model serving (FastAPI + Docker), automated batch inference via Airflow DAGs.</li>
+            <li>Deployed ONNX-optimized models for latency benchmarking; integrated Prometheus/Grafana monitoring and retraining feedback loops for continuous evaluation.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">2025</div>
+        <div class="cv-entry-body">
+          <h3>Cross-Domain Image Super-Resolution</h3>
+          <div class="org">PyTorch · ESRGAN · Diffusion Models · HPC</div>
+          <ul>
+            <li>Benchmarked CNN-, GAN- (ESRGAN), and diffusion-based SR models on non-natural scientific imagery using PSNR, SSIM, and perceptual metrics.</li>
+            <li>Built scalable evaluation framework with custom degradation pipelines and ablation studies; findings guided architecture selection for robust cross-domain reconstruction.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <div class="cv-section-title">Technical Skills</div>
+      <div class="skills-row">
+        <div class="skills-row-label">Languages</div>
+        <div class="skills-flat"><span>Python</span><span>C++</span><span>C</span><span>Java</span><span>SQL</span><span>MATLAB</span><span>JavaScript</span><span>R</span></div>
+      </div>
+      <div class="skills-row">
+        <div class="skills-row-label">ML / AI Frameworks</div>
+        <div class="skills-flat"><span>PyTorch</span><span>Scikit-learn</span><span>HuggingFace Transformers</span><span>NumPy</span><span>Pandas</span><span>conn2res</span></div>
+      </div>
+      <div class="skills-row">
+        <div class="skills-row-label">MLOps & Infrastructure</div>
+        <div class="skills-flat"><span>Docker</span><span>Apache Airflow</span><span>FastAPI</span><span>ONNX</span><span>Prometheus</span><span>Grafana</span><span>AWS / GCP</span></div>
+      </div>
+      <div class="skills-row">
+        <div class="skills-row-label">Web & Databases</div>
+        <div class="skills-flat"><span>React.js</span><span>Django</span><span>Flask</span><span>Vue.js</span><span>Node.js</span><span>MySQL</span><span>Firebase</span></div>
+      </div>
+      <div class="skills-row">
+        <div class="skills-row-label">Tools & Platforms</div>
+        <div class="skills-flat"><span>Git / GitHub</span><span>Linux</span><span>HPC Clusters</span><span>PlatformIO</span><span>Power BI</span><span>Tableau</span></div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <div class="cv-section-title">Leadership & Service</div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">2024 –<br>Present<br>NYU</div>
+        <div class="cv-entry-body">
+          <h3>Vice President</h3>
+          <div class="org">ACM-W (Association for Computing Machinery — Women), NYU</div>
+          <ul>
+            <li>Organized technical workshops, interview prep sessions, and panel discussions to increase engagement and community among women in engineering at NYU.</li>
+            <li>Coordinated cross-departmental outreach initiatives to promote inclusivity and professional development for women in computing.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cv-entry">
+        <div class="cv-entry-meta">2021 – 2024<br>KL University</div>
+        <div class="cv-entry-body">
+          <h3>Project Lead</h3>
+          <div class="org">Department Student Body, KL University</div>
+          <ul>
+            <li>Spearheaded coding workshops, hackathons, and industry networking sessions for 200+ students.</li>
+            <li>Facilitated sessions connecting students with industry professionals, fostering mentorship opportunities and career development.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <div class="cv-section-title">Languages</div>
+      <p style="color:var(--ink-soft); font-size:0.92rem;">English, Hindi, Telugu — all native proficiency</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="nav-logo">AB</span>
+      <p>MS Computer Engineering · NYU Tandon · New York</p>
+      <div class="footer-links">
+        <a href="https://github.com/asrita14" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/asritabobba" target="_blank">LinkedIn</a>
+        <a href="mailto:asritabobba@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+  <script>function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }</script>
+</body>
+</html>
